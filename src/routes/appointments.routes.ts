@@ -18,15 +18,19 @@ appointmentsRouter.post("/", (request, response) => {
     const { provider, date } = request.body;
 
     //Transforma a data de string em um objeto Date do JS
-      const parsedDate = parseISO(date);
+    const parsedDate = parseISO(date);
 
-      const CreateAppointment = new CreateAppointmentService(appointmentsRepository);
+    //Service
+    const CreateAppointment = new CreateAppointmentService(appointmentsRepository);
 
-      const appointment = CreateAppointment.execute({ date: parsedDate,
+    //Execução do service
+    const appointment = CreateAppointment.execute({
+      date: parsedDate,
       provider,
     });
 
-      return response.json(appointment);
+    //retornando resposa do service
+    return response.json(appointment);
   } catch (err) {
     return response.status(400).json({ error: err.message });
   }
