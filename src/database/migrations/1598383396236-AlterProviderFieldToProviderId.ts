@@ -1,5 +1,4 @@
 import { MigrationInterface, QueryRunner, TableColumn, TableForeignKey } from "typeorm";
-import { query } from "express";
 
 export default class AlterProviderFieldToProviderId1598383396236 implements MigrationInterface {
 
@@ -28,9 +27,10 @@ export default class AlterProviderFieldToProviderId1598383396236 implements Migr
 
     await queryRunner.dropColumn('appointments', 'provider_id');
 
-    await queryRunner.addColumn('appointments', new TableColumn({
-      name: 'provider',
-      type: 'varchar',
-    }));
+    await queryRunner.addColumn('appointments',
+      new TableColumn({
+        name: 'provider',
+        type: 'varchar',
+      }));
   }
 }
